@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html ng-app="ToDoApp" ng-controller="ThemeController" ng-class="{'dark-theme': isDarkMode, 'light-theme': !isDarkMode}">
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <style>
+    .light-navbar {
+      background-color: #f8f9fa; /* Light color */
+    }
+
+    .tic-mark {
+      width: 30px;
+      height: 30px;
+      border: 2px solid #007bff; /* Blue color */
+      border-radius: 50%; /* Make it circular */
+      position: relative;
+    }
+
+    .tic-mark::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 16px;
+      border-bottom: 2px solid #007bff; /* Blue color */
+      border-right: 2px solid #007bff; /* Blue color */
+      transform-origin: bottom right;
+      transform: rotate(-45deg);
+    }
+  </style>
+  <title>TO-DO-LIST</title>
+</head>
+<body ng-controller="ToDoController">
+  <nav class="navbar bg-body-tertiary light-navbar">
+    <div class="container">
+      <div class="tic-mark"></div> <!-- Tic mark logo -->
+      <a class="navbar-brand" href="#">
+      </a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2>To-Do List</h2>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" ng-model="newTask" placeholder="Add a new task">
+      <button class="btn btn-primary" ng-click="addTask()">Add</button>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="task in tasks">
+        {{ task.name }}
+        <span ng-show="task.editing">
+          <input type="text" class="form-control" ng-model="task.name" ng-blur="saveTask(task)">
+        </span>
+        <span ng-show="!task.editing">
+          <button class="btn btn-secondary" ng-click="editTask(task)">Edit</button>
+          <button class="btn btn-danger" ng-click="removeTask(task)">Delete</button>
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    var app = angular.module('ToDoApp', []);
+    app.controller('ToDoController', function($scope) {
+      //Default Tasks
+      $scope.tasks = [
+        { name: 'Attend Class' },
+        { name: 'Complete Assignment' },
+        { name: 'Study for CIE' }
+      ];
+      $scope.addTask = function() {
+        if ($scope.newTask) {
+          $scope.tasks.push({ name: $scope.newTask, editing: false });
+          $scope.newTask = '';
+        }
+      };
+      $scope.editTask = function(task) {
+        task.editing = true;
+      };
+      $scope.saveTask = function(task) {
+        task.editing = false;
+      };
+      $scope.removeTask = function(task) {
+        const index = $scope.tasks.indexOf(task);
+        if (index !== -1) {
+          $scope.tasks.splice(index, 1);
+        }
+      };
+    });
+
+    // Theme Controller
+    app.controller('ThemeController', function($scope) {
+      $scope.isDarkMode = false;
+
+      $scope.toggleTheme = function() {
+        console.log("Toggle theme called");
+        $scope.isDarkMode = !$scope.isDarkMode;
+        console.log("Dark mode:", $scope.isDarkMode);
+      };
+    });
+  </script>
+</body>
+</html>

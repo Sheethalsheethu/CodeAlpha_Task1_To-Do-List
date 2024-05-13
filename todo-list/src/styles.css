@@ -1,0 +1,102 @@
+/* Add your global styles here */
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .todo-item {
+    margin-bottom: 10px;
+  }
+  
+  .completed {
+    text-decoration: line-through;
+  }
+  /* Add your CSS styles here */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  text-align: center;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+span {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+input[type="text"]:focus,
+button:focus {
+  outline: none;
+}
+
+input[type="text"]:focus,
+button:focus,
+button:hover {
+  background-color: #0056b3;
+}
+
+
+.tic-mark {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #007bff; /* Blue color */
+  border-radius: 50%; /* Make it circular */
+  position: relative;
+}
+
+.tic-mark::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 16px;
+  border-bottom: 2px solid #007bff; /* Blue color */
+  border-right: 2px solid #007bff; /* Blue color */
+  transform-origin: bottom right;
+  transform: rotate(-45deg);
+}
+
+nav.light-navbar {
+  background-color: #343a40 !important; /* Darker color */
+}
+
+nav.light-navbar .navbar-brand {
+  color: #fff; /* Text color */
+}
