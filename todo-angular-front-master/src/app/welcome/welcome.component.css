@@ -1,0 +1,16 @@
+button {
+  margin: 10px 0;
+}
+
+.container {
+  margin-top: 100px;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+.welcome-message {
+  font-size: 20px;
+  margin-top: 10px;
+}

@@ -1,0 +1,50 @@
+<div class="container form-container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-6">
+
+      <div class="text-center" *ngIf="isUpdate && isLoading">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+
+      <div *ngIf="!isUpdate || !isLoading">
+        <h1 class="text-center">{{ isUpdate ? 'Update Todo' : 'Create Todo' }}</h1>
+        <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+        <form (ngSubmit)="onSubmit()" #form="ngForm">
+          <fieldset class="form-group">
+            <label for="description">Description</label>
+            <input class="form-control"
+                   type="text"
+                   id="description"
+                   name="description"
+                   required
+                   [(ngModel)]="todo.description"
+                   #description="ngModel">
+            <span class="help-block" *ngIf="description.invalid && description.touched">
+              The description is required!
+            </span>
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="date">Target Date</label>
+            <input class="form-control"
+                   type="date"
+                   id="date"
+                   name="date"
+                   required
+                   [ngModel]="todo.targetDate | date: 'yyyy-MM-dd'"
+                   (ngModelChange)="todo.targetDate = $event"
+                   #targetDate="ngModel">
+            <span class="help-block" *ngIf="targetDate.invalid && targetDate.touched">
+              The target date is required!
+            </span>
+          </fieldset>
+          <div class="text-center">
+            <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
+              <fa-icon [icon]="isUpdate ? faEdit : faPlus"></fa-icon>
+              {{ isUpdate ? 'Update' : 'Create' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
